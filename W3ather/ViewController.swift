@@ -18,9 +18,10 @@ class ViewController: UIViewController, UISearchBarDelegate{
     
     
     @IBAction func searchBtnPressed(_ sender: UIBarButtonItem) {
-        //tạo serachBar bằng code
+        //tạo viewController search bằng code
         let searchController=UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate=self
+        
         present(searchController, animated: true, completion: nil)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {//kích search thì sẽ trigger
@@ -42,7 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate{
             else{
                 // Remove annotation form map( annotation: chú thích)
                 print(reponse?.boundingRegion.center.latitude)
-               
+                print(reponse?.boundingRegion.center.longitude)
             }
         }
     }
