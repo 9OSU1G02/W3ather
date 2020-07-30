@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import Alamofire
+import SwiftyJSON
 extension Date {
     var hour: Int { return Calendar.current.component(.hour, from: self) } // get hour only from Date
 }
@@ -27,7 +29,7 @@ class ViewController: UIViewController, UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {//kích search thì sẽ trigger
         //Không cho user tương tác với màn hình sau khi nhấn search
         self.view.isUserInteractionEnabled = true
-                               
+        
         //Hide search bar
         searchBar.resignFirstResponder()
         dismiss(animated: true, completion: nil)
@@ -41,9 +43,9 @@ class ViewController: UIViewController, UISearchBarDelegate{
                 print("ERROR")
             }
             else{
-                // Remove annotation form map( annotation: chú thích)
-                print(reponse?.boundingRegion.center.latitude)
-                print(reponse?.boundingRegion.center.longitude)
+                if let lat = reponse?.boundingRegion.center.latitude, let lon = reponse?.boundingRegion.center.longitude{
+                    self.requestInfo(lat: lat, lon: lon)
+                }
             }
         }
     }
@@ -65,10 +67,28 @@ class ViewController: UIViewController, UISearchBarDelegate{
         else{//Night time
             backgroundView.image=UIImage(named: "NightBackGround")
             navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.3051784337, green: 0.344889164, blue: 0.7166694999, alpha: 1)
-
         }
     }
     
-    
+    func requestInfo(lat:Double, lon:Double) {
+        
+        AF.request("https://api.weatherbit.io/v2.0/forecast/daily?lat=\(lat)&lon=\(lon)&days=3&key=d702ceb3c7484a7886917d75a3b21533").responseJSON { (response) in
+            do {
+                let weatherJSON:JSON=JSON(try response.result.get())
+                let cityName=weatherJSON["city_name"].stringValue
+                let minTemp=weatherJSON["data"][0]["min_temp"]
+                let maxTemp=weatherJSON["data"][0]["max_temp"].doubleValue
+                let temp=weatherJSON["data"][0]["temp"]
+                let description=weatherJSON["data"][0]["weather"]["description"]
+                let code=weatherJSON["data"][0]["weather"]["code"].intValue
+                
+            }
+            catch{
+                print(error)
+            }
+            
+        }
+        
+    }
 }
 

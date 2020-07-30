@@ -3,19 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6615D1424D2DD0B00861690 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6615D1324D2DD0B00861690 /* WeatherData.swift */; };
 		B6CE638824D12096009AC51B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE638724D12096009AC51B /* AppDelegate.swift */; };
 		B6CE638A24D12096009AC51B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE638924D12096009AC51B /* SceneDelegate.swift */; };
 		B6CE638C24D12096009AC51B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE638B24D12096009AC51B /* ViewController.swift */; };
 		B6CE638F24D12096009AC51B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CE638D24D12096009AC51B /* Main.storyboard */; };
 		B6CE639124D12097009AC51B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6CE639024D12097009AC51B /* Assets.xcassets */; };
 		B6CE639424D12097009AC51B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CE639224D12097009AC51B /* LaunchScreen.storyboard */; };
+		C2C0129DAAB3FE0EAC7E6698 /* Pods_W3ather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B77F8BC28D285B95A8A66EB /* Pods_W3ather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B77F8BC28D285B95A8A66EB /* Pods_W3ather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_W3ather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56826E30DB8CE3C73B819A4A /* Pods-W3ather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W3ather.debug.xcconfig"; path = "Target Support Files/Pods-W3ather/Pods-W3ather.debug.xcconfig"; sourceTree = "<group>"; };
+		5784978D368F2FADF3AB55D6 /* Pods-W3ather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W3ather.release.xcconfig"; path = "Target Support Files/Pods-W3ather/Pods-W3ather.release.xcconfig"; sourceTree = "<group>"; };
+		B6615D1324D2DD0B00861690 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		B6CE638424D12096009AC51B /* W3ather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = W3ather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CE638724D12096009AC51B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6CE638924D12096009AC51B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C0129DAAB3FE0EAC7E6698 /* Pods_W3ather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58899736DEECF87244868ABD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				56826E30DB8CE3C73B819A4A /* Pods-W3ather.debug.xcconfig */,
+				5784978D368F2FADF3AB55D6 /* Pods-W3ather.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B6CE637B24D12096009AC51B = {
 			isa = PBXGroup;
 			children = (
 				B6CE638624D12096009AC51B /* W3ather */,
 				B6CE638524D12096009AC51B /* Products */,
+				58899736DEECF87244868ABD /* Pods */,
+				DF24421B7279145B92DFB4E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +77,21 @@
 				B6CE638724D12096009AC51B /* AppDelegate.swift */,
 				B6CE638924D12096009AC51B /* SceneDelegate.swift */,
 				B6CE638B24D12096009AC51B /* ViewController.swift */,
+				B6615D1324D2DD0B00861690 /* WeatherData.swift */,
 				B6CE638D24D12096009AC51B /* Main.storyboard */,
 				B6CE639024D12097009AC51B /* Assets.xcassets */,
 				B6CE639224D12097009AC51B /* LaunchScreen.storyboard */,
 				B6CE639524D12097009AC51B /* Info.plist */,
 			);
 			path = W3ather;
+			sourceTree = "<group>";
+		};
+		DF24421B7279145B92DFB4E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B77F8BC28D285B95A8A66EB /* Pods_W3ather.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6CE639824D12097009AC51B /* Build configuration list for PBXNativeTarget "W3ather" */;
 			buildPhases = (
+				A7E54B063F3B15AFD6C5735F /* [CP] Check Pods Manifest.lock */,
 				B6CE638024D12096009AC51B /* Sources */,
 				B6CE638124D12096009AC51B /* Frameworks */,
 				B6CE638224D12096009AC51B /* Resources */,
+				1C13B495428CDCCB7E5F256E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +162,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C13B495428CDCCB7E5F256E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-W3ather/Pods-W3ather-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-W3ather/Pods-W3ather-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-W3ather/Pods-W3ather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7E54B063F3B15AFD6C5735F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-W3ather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B6CE638024D12096009AC51B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +211,7 @@
 			files = (
 				B6CE638C24D12096009AC51B /* ViewController.swift in Sources */,
 				B6CE638824D12096009AC51B /* AppDelegate.swift in Sources */,
+				B6615D1424D2DD0B00861690 /* WeatherData.swift in Sources */,
 				B6CE638A24D12096009AC51B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +354,7 @@
 		};
 		B6CE639924D12097009AC51B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56826E30DB8CE3C73B819A4A /* Pods-W3ather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -294,12 +367,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = huyquocnguyen1902.W3ather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		B6CE639A24D12097009AC51B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5784978D368F2FADF3AB55D6 /* Pods-W3ather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -312,7 +386,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = huyquocnguyen1902.W3ather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
