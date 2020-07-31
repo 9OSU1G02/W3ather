@@ -7,14 +7,14 @@
 //
 
 import Foundation
-struct WeatherData {
+struct WeatherModel {
     
-    let cityName:String
-    let minTemp:String
-    let maxTemp:String
-    let temp:String
-    let description:String
-    let code:Int
+    var cityName:String
+    var minTemp:String
+    var maxTemp:String
+    var temp:String
+    var description:String
+    var code:Int
     var conditionName: String {
         switch code {
         case 200...233  :
