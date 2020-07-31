@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 extension Date {
     var hour: Int { return Calendar.current.component(.hour, from: self) } // get hour only from current Day
 }
@@ -18,8 +19,11 @@ class WeatherViewController: UIViewController, UISearchBarDelegate{
     var weatherManager=WeatherManager()
     let today = Date()
     let formatter=DateFormatter()
+    let locationManager=CLLocationManager()
     
-    
+    @IBAction func currentWeatherPressed(_ sender: UIBarButtonItem) {
+                locationManager.requestLocation()
+    }
     @IBOutlet weak var backgroundView: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var todayCondition: UIImageView!
@@ -55,7 +59,10 @@ class WeatherViewController: UIViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        locationManager.delegate=self
         weatherManager.delegate=self
+        
+        locationManager.requestLocation()
         //Change Background
         changeBackground()
     }
@@ -150,5 +157,19 @@ extension WeatherViewController:WeatherManagerDelegate{
                 dayYonderDayOfWeek.text=days[1]
             }
         }
+    }
+}
+extension WeatherViewController:CLLocationManagerDelegate{
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location=locations.last{
+            let lat=Double(location.coordinate.latitude)
+            let long=Double(location.coordinate.longitude)
+            weatherManager.fetchWeather(lat: lat, lon: long)
+        }
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

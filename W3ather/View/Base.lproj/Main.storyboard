@@ -146,7 +146,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="qsb-bb-hXc">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="location.fill" catalog="system" id="khZ-lT-GkF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="currentWeatherPressed:" destination="BYZ-38-t0r" id="KGC-gO-H9q"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Uxa-rq-PC5">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="searchBtnPressed:" destination="BYZ-38-t0r" id="rLp-4e-ptg"/>
                             </connections>
@@ -201,6 +208,7 @@
         <image name="cloud.bolt.fill" catalog="system" width="128" height="128"/>
         <image name="cloud.snow.fill" catalog="system" width="128" height="128"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="88"/>
+        <image name="location.fill" catalog="system" width="128" height="115"/>
         <image name="sun.min.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>
