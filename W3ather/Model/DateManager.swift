@@ -61,8 +61,15 @@ struct DataManager {
                 dayAfterTomorrowDayOfWeek=days[0]
                 dayYonderDayOfWeek=days[1]
             }
-            daysOfWeek=[tomorrowDayofWeek,dayAfterTomorrowDayOfWeek,dayAfterTomorrowDayOfWeek]
+            else if index == 6 && days[index]==day{
+                tomorrowDayofWeek=days[0]
+                dayAfterTomorrowDayOfWeek=days[1]
+                dayYonderDayOfWeek=days[2]
+                
+            }
+            daysOfWeek=[tomorrowDayofWeek,dayAfterTomorrowDayOfWeek,dayYonderDayOfWeek]
         }
+        print(daysOfWeek)
         return daysOfWeek
     }
 }

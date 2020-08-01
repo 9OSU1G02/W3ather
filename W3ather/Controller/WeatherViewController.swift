@@ -119,6 +119,7 @@ class WeatherViewController: UIViewController, UISearchBarDelegate{
         dayYonderDayOfMonth.text=daysOfMonth[2]
         
         tomorrowDayOfWeek.text=daysOfWeek[0]
+        
         dayAfterTomorrowDayOfWeek.text=daysOfWeek[1]
         dayYonderDayOfWeek.text=daysOfWeek[2]
         
