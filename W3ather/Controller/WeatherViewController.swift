@@ -11,11 +11,9 @@ import MapKit
 import Alamofire
 import SwiftyJSON
 import CoreLocation
-extension Date {
-    var hour: Int { return Calendar.current.component(.hour, from: self) } // get current hour from current Day
-}
+
 class WeatherViewController: UIViewController, UISearchBarDelegate{
-    
+    var dateManager=DataManager()
     var weatherManager=WeatherManager()
     let today = Date()
     let formatter=DateFormatter()   //use for format Date type
@@ -69,22 +67,19 @@ class WeatherViewController: UIViewController, UISearchBarDelegate{
         searchRequest(searchBar: searchBar)
     }
     
-    
-    
     func searchRequest(searchBar: UISearchBar){
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = searchBar.text//lấy text từ searchBar cho vào searchRequest
         let activeSearch=MKLocalSearch(request: searchRequest)
         activeSearch.start { (reponse, error) in
             if reponse == nil{ // Nếu reponse không được trả về
-                print("ERROR")
+                print(self.cityLabel.text="Unknow Location")
             }
             else{   //nếu có reponse thì sẽ lấy lat and lon và chuyền vào fetchWeather
                 if let lat = reponse?.boundingRegion.center.latitude, let lon = reponse?.boundingRegion.center.longitude{
                     let latt=Double(lat)
                     let long=Double(lon)
                     self.weatherManager.fetchWeather(lat: latt, lon: long)
-                    
                 }
             }
         }
@@ -106,68 +101,34 @@ class WeatherViewController: UIViewController, UISearchBarDelegate{
     }
     
     func updateUI(weatherArray:[WeatherModel]){
-        self.cityLabel.text=weatherArray[0].cityName
-        self.minTemp.text=weatherArray[0].minTemp
-        self.maxTemp.text=weatherArray[0].maxTemp
-        self.temp.text=weatherArray[0].temp
-        self.descript.text=weatherArray[0].description
-        self.todayCondition.image=UIImage(systemName: weatherArray[0].conditionName)
-        self.tomorrowCondition.image=UIImage(systemName: weatherArray[1].conditionName)
-        self.dayAfterTomorrowCondition.image=UIImage(systemName: weatherArray[2].conditionName)
-        self.dayYonderCondition.image=UIImage(systemName: weatherArray[3].conditionName)
-        dayOfMonthUI()
-        dayOfWeekUI()
-    }
-    
-    func dayOfMonthUI() {
-        formatter.dateFormat="dd/MM"//format định dạng Date
-        let calendar = Calendar.current
-        let midnight = calendar.startOfDay(for: today)
-        let tomorrow=calendar.date(byAdding: .day, value: 1, to: midnight)!
-        let dayAfterTomorrow=calendar.date(byAdding: .day, value: 2, to: midnight)
-        let dayYonder=calendar.date(byAdding: .day, value: 3, to: midnight)
-        //Change label
-        tomorrowDayOfMonth.text=formatter.string(from: tomorrow)
-        dayAfterTomorrowDayOfMonth.text=formatter.string(from: dayAfterTomorrow!)
-        dayYonderDayOfMonth.text=formatter.string(from: dayYonder!)
-    }
-    
-    func dayOfWeekUI() {
-        formatter.dateFormat = "EEE" //formatDate
-        //["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] to ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        let day = formatter.string(from: today)
-        //current name day of week (Sun,Mon,...Sat)
+        let daysOfMonth=dateManager.dayOfMonthUI()
+        let daysOfWeek=dateManager.dayOfWeek()
         
-        let calendar = Calendar(identifier: .gregorian)
-        let days = calendar.weekdaySymbols
-        //["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        cityLabel.text=weatherArray[0].cityName
+        minTemp.text=weatherArray[0].minTemp
+        maxTemp.text=weatherArray[0].maxTemp
+        temp.text=weatherArray[0].temp
+        descript.text=weatherArray[0].description
+        todayCondition.image=UIImage(systemName: weatherArray[0].conditionName)
+        tomorrowCondition.image=UIImage(systemName: weatherArray[1].conditionName)
+        dayAfterTomorrowCondition.image=UIImage(systemName: weatherArray[2].conditionName)
+        dayYonderCondition.image=UIImage(systemName: weatherArray[3].conditionName)
         
-        for index in 0...6{
-            if index <= 3 && days[index]==day
-            {
-                tomorrowDayOfWeek.text=days[index+1]
-                dayAfterTomorrowDayOfWeek.text=days[index+2]
-                dayYonderDayOfWeek.text=days[index+3]
-            }
-            else if index == 4 && days[index]==day
-            {
-                tomorrowDayOfWeek.text=days[5]
-                dayAfterTomorrowDayOfWeek.text=days[6]
-                dayYonderDayOfWeek.text=days[0]
-            }
-            else if index == 5 && days[index]==day{
-                tomorrowDayOfWeek.text=days[6]
-                dayAfterTomorrowDayOfWeek.text=days[0]
-                dayYonderDayOfWeek.text=days[1]
-            }
-        }
+        tomorrowDayOfMonth.text=daysOfMonth[0]
+        dayAfterTomorrowDayOfMonth.text=daysOfMonth[1]
+        dayYonderDayOfMonth.text=daysOfMonth[2]
+        
+        tomorrowDayOfWeek.text=daysOfWeek[0]
+        dayAfterTomorrowDayOfWeek.text=daysOfWeek[1]
+        dayYonderDayOfWeek.text=daysOfWeek[2]
+        
     }
 }
 
 //MARK: - WeatherManager Delegate
 extension WeatherViewController:WeatherManagerDelegate{
-    func didUpdateWeather(weather: [WeatherModel]) {
-        updateUI(weatherArray: weather)
+    func didUpdateWeather(weatherArray: [WeatherModel]) {
+        updateUI(weatherArray: weatherArray)
     }
 }
 

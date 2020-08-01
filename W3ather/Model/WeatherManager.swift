@@ -11,7 +11,7 @@ import SwiftyJSON
 import Alamofire
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(weather:[WeatherModel])
+    func didUpdateWeather(weatherArray:[WeatherModel])
 }
 struct WeatherManager {
     var delegate:WeatherManagerDelegate?
@@ -22,10 +22,9 @@ struct WeatherManager {
     func performRequest(with URL:String){
         AF.request(URL).responseJSON { (response) in
             do {
-                
                 let weatherJSON:JSON=JSON(try response.result.get())  //return JSON data
                 let weatherModel=self.parseJSON(weatherJSON: weatherJSON)
-                self.delegate?.didUpdateWeather(weather: weatherModel)
+                self.delegate?.didUpdateWeather(weatherArray: weatherModel)
             }
             catch{
                 print(error)
@@ -36,7 +35,7 @@ struct WeatherManager {
     //Parse JSON data to Swift Data ,then use it to create WeatherModel instance and and return [WeatherModel] ( array có 4 phần tử WeatherModel ở trong, tương đương với 4 ngày)
     func parseJSON(weatherJSON:JSON)->[WeatherModel]{
         var weatherArray:[WeatherModel]=[]  //empty array have WeatherModel datatype
-        for i in 0...3{
+        for i in 0...3{     //lặp qua các đối tượng của JSON (4 đối tượng tương đương với 4 ngày)
             let cityLabel=weatherJSON["city_name"].stringValue
             let minTemp=String(format:"%.0f",weatherJSON["data"][i]["min_temp"].doubleValue)
             let maxTemp=String(format:"%.0f",weatherJSON["data"][i]["max_temp"].doubleValue)
