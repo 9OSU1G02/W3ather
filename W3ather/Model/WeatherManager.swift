@@ -23,18 +23,19 @@ struct WeatherManager {
         AF.request(URL).responseJSON { (response) in
             do {
                 
-                let weatherJSON:JSON=JSON(try response.result.get())
-                var weatherModel=self.parseJSON(weatherJSON: weatherJSON)
+                let weatherJSON:JSON=JSON(try response.result.get())  //return JSON data
+                let weatherModel=self.parseJSON(weatherJSON: weatherJSON)
                 self.delegate?.didUpdateWeather(weather: weatherModel)
-                
             }
             catch{
                 print(error)
             }
         }
     }
+    
+    //Parse JSON data to Swift Data ,then use it to create WeatherModel instance and and return [WeatherModel] ( array có 4 phần tử WeatherModel ở trong, tương đương với 4 ngày)
     func parseJSON(weatherJSON:JSON)->[WeatherModel]{
-        var weatherArray:[WeatherModel]=[]
+        var weatherArray:[WeatherModel]=[]  //empty array have WeatherModel datatype
         for i in 0...3{
             let cityLabel=weatherJSON["city_name"].stringValue
             let minTemp=String(format:"%.0f",weatherJSON["data"][i]["min_temp"].doubleValue)
@@ -42,13 +43,9 @@ struct WeatherManager {
             let temp=String(format: "%.0f", weatherJSON["data"][i]["temp"].doubleValue)
             let descript=weatherJSON["data"][i]["weather"]["description"].stringValue
             let code=weatherJSON["data"][i]["weather"]["code"].intValue
-            var weather=WeatherModel(cityName: cityLabel, minTemp: minTemp, maxTemp: maxTemp, temp: temp, description: descript, code: code)
+            let weather=WeatherModel(cityName: cityLabel, minTemp: minTemp, maxTemp: maxTemp, temp: temp, description: descript, code: code)
             weatherArray.append(weather)
         }
-            
-             return weatherArray
-
-       
-        
+        return weatherArray
     }
 }
